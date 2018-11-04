@@ -1,4 +1,4 @@
-package main;
+package br.unisinos.main;
 
 public class Main {
 
