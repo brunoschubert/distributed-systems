@@ -1,4 +1,5 @@
 package br.unisinos.main;
+import br.unisinos.editor.TextEditor;
 
 public class Main {
 
@@ -11,5 +12,7 @@ public class Main {
 		 * Text Reader
 		 * ZMQ pub/sub pattern
 		 */
+		
+	        TextEditor edit = new TextEditor(); 	
 	}
 }
