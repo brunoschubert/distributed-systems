@@ -1,4 +1,5 @@
 package br.unisinos.client;
+
 import org.zeromq.*;
 import org.zeromq.ZMQ.Socket;
 import zmq.ZError;
