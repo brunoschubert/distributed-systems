@@ -1,4 +1,4 @@
-package br.unisinos.pubsub.example;
+package br.unisinos.pubsub;
 
 public class Subscriber {
 	//atributo de controle

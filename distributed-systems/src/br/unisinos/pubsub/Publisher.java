@@ -1,4 +1,4 @@
-package br.unisinos.pubsub.example;
+package br.unisinos.pubsub;
 
 import br.unisinos.factories.*;
 import java.util.Random;
