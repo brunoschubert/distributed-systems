@@ -27,7 +27,7 @@ public class SubscriberA extends Subscriber{
 			String address = subscriber.recvStr();
 			// Lê a mensagem
 			String contents = subscriber.recvStr();
-			//passa o conteudo e o numero de parada
+			//Define o tempo de parar quando o número do Animal é igual ao sorteado 
 			if(subs.isTimeToStop(contents,stopper)){
 				System.out.println("Fugiu no " + contents);
 				subs.stopExecuting();

@@ -3,6 +3,7 @@ package br.unisinos.pubsub.example;
 public class Subscriber {
 	//atributo de controle
 	boolean executing;
+	
 	public Subscriber(){
 		this.executing = true;
 	}
@@ -28,7 +29,7 @@ public class Subscriber {
 		return Integer.parseInt(sbr.toString());
 	}
 //------------------------------------------------------------------------------------
-	//Define o tempo de parar quando o número do Animal é igual ao sorteado 
+	//Recebe e avalia o conteudo da msg e o numero de parada
 	public boolean isTimeToStop(String content, int count){
 		int stopper;
 		stopper = extractDigits(content);
