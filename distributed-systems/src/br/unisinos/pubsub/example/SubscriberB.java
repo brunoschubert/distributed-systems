@@ -12,7 +12,7 @@ public class SubscriberB {
         Socket subscriber = context.socket(ZMQ.SUB);
 
         subscriber.connect("tcp://localhost:5563");
-        subscriber.subscribe("B".getBytes());
+        subscriber.subscribe("Msg2".getBytes());
         while (!Thread.currentThread ().isInterrupted ()) {
             // Lê envelope com o endereço
             String address = subscriber.recvStr ();

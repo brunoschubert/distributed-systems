@@ -14,10 +14,10 @@ public class Publisher {
         publisher.bind("tcp://*:5563");
         while (!Thread.currentThread ().isInterrupted ()) {
             // Cria dois envios com msgs e pacotes diferentes
-            publisher.sendMore ("A");
-            publisher.send ("We don't want to see this");
-            publisher.sendMore ("B");
-            publisher.send("We would like to see this");
+            publisher.sendMore ("Msg1");
+            publisher.send ("Esta é a mensagem 1");
+            publisher.sendMore ("Msg2");
+            publisher.send("Esta é a mensagem 2");
         }
         publisher.close ();
         context.term ();
