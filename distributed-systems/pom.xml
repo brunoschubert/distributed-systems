@@ -18,10 +18,22 @@
   </build>
 
   <dependencies>
+	<!-- ZERO MQ -->
   	<dependency>
   		<groupId>org.zeromq</groupId>
   		<artifactId>jeromq</artifactId>
   		<version>0.4.3</version>
   	</dependency>
+	<!-- JACKSON -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.dataformat</groupId>
+		<artifactId>jackson-dataformat-xml</artifactId>
+		<version>2.8.6</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-annotations</artifactId>
+		<version>2.8.6</version>
+	</dependency>
   </dependencies>
 </project>
