@@ -12,11 +12,15 @@ import org.zeromq.ZMQ.Socket;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class AbstractNode {
 	int nodeId;
 	int msgId = 0;
+	
 	String pubFilePath;
+	String subFilePath;
+	
 	Context pubContext;
 	Socket publisher;
 
@@ -25,6 +29,10 @@ public abstract class AbstractNode {
 	//-------------------------------------------------------------------------------
 	public String getPubFilePath(){
 		return this.pubFilePath;
+	}
+	//-------------------------------------------------------------------------------
+	public String getSubFilePath(){
+		return this.subFilePath;
 	}
 	//-----------------------------UTILITY METHODS------------------------------------
 //--------------------------------------------------------------------------------------------------
@@ -45,7 +53,8 @@ public abstract class AbstractNode {
 		//publish message topic
 		publisher.sendMore(msg.getMsgTopic());
 		//publish entire message as string
-		publisher.send(msg.toString());
+		ObjectMapper mapper = new ObjectMapper();
+		publisher.send(mapper.writeValueAsString(msg));
 	}
 	//-----------------------------------------------------------------------------------------------		
 	//Publishes an already created message -- For use inside Main loops with getter
@@ -59,7 +68,8 @@ public abstract class AbstractNode {
 		//publish message topic
 		publisher.sendMore(msg.getMsgTopic());
 		//publish entire message as string
-		publisher.send(msg.toString());
+		ObjectMapper mapper = new ObjectMapper();
+		publisher.send(mapper.writeValueAsString(msg));
 	}
 	//---------------------------Message Creator-------------------------------------
 	public String createMsg() throws JsonGenerationException, JsonMappingException, IOException{
@@ -94,7 +104,21 @@ public abstract class AbstractNode {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 //-----------------------------------Subscriber Methods---------------------------------------------
-	
+	public void receiveMessage() throws JsonParseException, JsonMappingException, IOException{
+		//Reads message topic
+		String topic = subscriber.recvStr();
+		//TODO ADD DUPLICATE CONTROL -- ADD ID on Topic?
+		//Receive entire JSON as a string
+		String jsonString = subscriber.recvStr();
+		//Creates file handler
+		StringToPolo stp = new StringToPolo();
+		Message msg = new Message();
+		//Creates a new Message File based on the String | Is able to access methods for verifications
+		msg = stp.convertToJson(jsonString);
+		//Prints on console the message contents
+		System.out.println("NEW MESSAGE FROM: "+ msg.getNodeId() + "\tTOPIC: " + topic);
+		System.out.println("MESSAGE: " + msg.getMsgContents());
+	}
 }
 
 

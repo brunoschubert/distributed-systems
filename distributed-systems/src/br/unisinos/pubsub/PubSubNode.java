@@ -5,8 +5,10 @@ import org.zeromq.ZMQ;
 public class PubSubNode extends AbstractNode {
 	
 //-----------------------------PUBLISH-SUBSCRIBER NODE--------------------------------------
-	public void startPubSub(int contextPub, String adressPub, 
+	public void startPubSub(int nodeId, int contextPub, String adressPub, 
 			int contextSub, String adressSub, String topic) {
+		//TODO Better Id methods
+		this.nodeId = nodeId;
 		//Starts pub module
 		this.pubContext = ZMQ.context(contextPub);
 		this.publisher = pubContext.socket(ZMQ.PUB);
@@ -14,7 +16,7 @@ public class PubSubNode extends AbstractNode {
 		this.publisher.bind(adressPub);
 		//Starts sub module
 		this.subContext = ZMQ.context(contextSub);
-		this.subscriber = pubContext.socket(ZMQ.SUB);
+		this.subscriber = subContext.socket(ZMQ.SUB);
 		//Chose adress to listen to
 		this.subscriber.connect(adressSub);
 		//Chose topic to listen to
