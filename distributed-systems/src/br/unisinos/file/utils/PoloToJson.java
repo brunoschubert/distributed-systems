@@ -11,6 +11,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PoloToJson {
 
+	//Convert a Message Object to a matching JSON
+	public void createJsonMessage(String nodeId, String msgId, String msgTopic, 
+			String msgContents, String filePath) throws JsonGenerationException, JsonMappingException, IOException{
+		//Convert Message to JSON
+		ObjectMapper mapper = new ObjectMapper();
+		//Create new Message
+		Message msg = new Message();
+		msg.setNodeId(nodeId);
+		msg.setMsgId(msgId);
+		msg.setTimeUTC();
+		msg.setMsgTopic(msgTopic);
+		msg.setMsgContents(msgContents);
+
+		/*
+		//JSON POSSIBLE USES
+        //Transform Message into a String
+        String jsonString = mapper.writeValueAsString(msg);
+        //Writes JSON to the console
+        mapper.writeValue(System.out, msg);
+		 */
+
+		//Writes JSON as file in the specified File Path
+		mapper.writeValue(new File(filePath), msg);
+	}
+	
+	/* CREATES A HARDCODED JSON
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 		//Convert Message to JSON
 		ObjectMapper mapper = new ObjectMapper();
@@ -19,18 +45,12 @@ public class PoloToJson {
 		msg.setNodeId("No 1");
 		msg.setMsgId("Mensagem 1");
 		msg.setTimeUTC();
+		msg.setMsgTopic("Introduction");
 		msg.setMsgContents("Hello!\nMy name is Inigo Montoya.\n"
 				+ "You killed my father...\nPrepare to Die!");
-
-		/*
-		//FORMAS DE USO DO JSON
-        //Transforma Mensagem em uma string
-        String jsonString = mapper.writeValueAsString(msg);
-        //Escreve JSON no console
-        mapper.writeValue(System.out, msg);
-		 */
 
 		//Escreve JSON como arquivo
 		mapper.writeValue(new File("D:/msg.json"), msg);
 	}
+	*/
 }
