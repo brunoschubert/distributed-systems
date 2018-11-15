@@ -22,7 +22,8 @@ public class JsonToPolo {
 		Message msg = objectMapper.readValue(new File(filePath), Message.class);
 		return msg;
 	}
-
+//-----------------------------TEST CASE-------------------------------------------------	
+	/*
 	public static void main(String[] args) throws IOException {  
 		//Test Case
 		JsonToPolo JToString = new JsonToPolo();
@@ -31,6 +32,6 @@ public class JsonToPolo {
 		Message msg = new Message();
 		msg = JToString.convertToMessage("D:/msg.json");
 		System.out.println(msg.toString());
-		
 	}
+	*/
 }
