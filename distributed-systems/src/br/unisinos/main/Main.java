@@ -26,5 +26,7 @@ public class Main {
 		
 		pub.stopPublisher();
 		sub.stopSub();
+		
+		input.close();
 	}
 }
