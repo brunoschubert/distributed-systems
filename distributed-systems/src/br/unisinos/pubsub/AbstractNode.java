@@ -16,55 +16,60 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 public abstract class AbstractNode {
 	int nodeId;
 	int msgId = 0;
+	String pubFilePath;
 	Context pubContext;
 	Socket publisher;
-	
+
 	Context subContext;
 	Socket subscriber;
-	
-//-----------------------------UTILITY METHODS------------------------------------
-//-----------------------------PUBLISHER METHODS----------------------------------
-//-----------------------------Message Publishers----------------------------------
-		//Creates and Publish a Message 
-		public void publishMsg() throws 
-		JsonParseException, JsonMappingException, IOException{
-			//calls message creation
-			String filePath = createMsg();
-			//Use utility class to get MSG attributes
-			JsonToPolo jtp = new JsonToPolo();
-			//Creates a new message object to extract attributes from
-			Message msg = new Message();
-			msg = jtp.convertToMessage(filePath);
-			//publish message topic
-			publisher.sendMore(msg.getMsgTopic());
-			//publish entire message as string
-			publisher.send(msg.toString());
-		}
-//-----------------------------------------------------------------------------------------------		
-		//Publishes an already created message
-		public void publishMsg(String filePath) throws 
-		JsonParseException, JsonMappingException, IOException{
-			//calls message creation
-			createMsg();
-			//Use utility class to get MSG attributes
-			JsonToPolo jtp = new JsonToPolo();
-			//Creates a new message object to extract attributes from
-			Message msg = new Message();
-			msg = jtp.convertToMessage(filePath);
-			//publish message topic
-			publisher.sendMore(msg.getMsgTopic());
-			//publish entire message as string
-			publisher.send(msg.toString());
-		}
-//---------------------------Message Creator-------------------------------------
+	//-------------------------------------------------------------------------------
+	public String getPubFilePath(){
+		return this.pubFilePath;
+	}
+	//-----------------------------UTILITY METHODS------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+	//-----------------------------PUBLISHER METHODS----------------------------------
+	//-----------------------------Message Publishers----------------------------------
+	//Creates and Publish a Message 
+	public void publishMsg() throws 
+	JsonParseException, JsonMappingException, IOException{
+		//calls message creation and save filePath
+		String filePath = createMsg();
+		//Use utility class to get MSG attributes
+		JsonToPolo jtp = new JsonToPolo();
+		//Creates a new message object to extract attributes from
+		Message msg = new Message();
+		msg = jtp.convertToMessage(filePath);
+		//publish message topic
+		publisher.sendMore(msg.getMsgTopic());
+		//publish entire message as string
+		publisher.send(msg.toString());
+	}
+	//-----------------------------------------------------------------------------------------------		
+	//Publishes an already created message -- For use inside Main loops with getter
+	public void publishMsg(String filePath) throws 
+	JsonParseException, JsonMappingException, IOException{
+		//Use utility class to get MSG attributes
+		JsonToPolo jtp = new JsonToPolo();
+		//Creates a new message object to extract attributes from
+		Message msg = new Message();
+		msg = jtp.convertToMessage(filePath);
+		//publish message topic
+		publisher.sendMore(msg.getMsgTopic());
+		//publish entire message as string
+		publisher.send(msg.toString());
+	}
+	//---------------------------Message Creator-------------------------------------
 	public String createMsg() throws JsonGenerationException, JsonMappingException, IOException{
 		//Receives user input
 		Scanner input = new Scanner(System.in);
 		//Receives message Topic
-		System.out.println("Insert Message Topic:\n");
-		String msgTopic = input.next();
+		System.out.println("Insert Message Topic:");
+		String msgTopic = input.nextLine();
 		//Receives message Contents
-		System.out.println("Insert Message Contents:\n");
+		System.out.println("Insert Message Contents:");
 		String msgContents = input.nextLine();
 		//Use utility class to create the Message as a JSON String and saves file locally 
 		PoloToJson ptj = new PoloToJson();
@@ -72,16 +77,25 @@ public abstract class AbstractNode {
 		String nId = Integer.toString(nodeId);
 		String mId = Integer.toString(msgId);
 		//Receives desired file path
-		String saveLocation = input.next();
-		System.out.println("Insert Save Location[ Example: C:/ ]:\n");
+		System.out.println("Insert Save Location[ Example: D:/ ]:");
+		String saveLocation = input.nextLine();
 		String filePath = saveLocation + mId +".json";
 		//Creates a msg based on input and saves it on the default location
 		ptj.createJsonMessage(nId, mId, msgTopic, msgContents, filePath);
 		
+		//increments message ID
+		this.msgId++;
+		
 		input.close();
-		return filePath;
+		this.pubFilePath = filePath;
+		return pubFilePath;
 	}
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//-----------------------------------Subscriber Methods---------------------------------------------
+	
 }
 
-	
+
 
