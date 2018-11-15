@@ -10,10 +10,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PoloToJson {
-
 	//Creates and convert a Message Object to a matching JSON
-	public void createJsonMessage(String nodeId, String msgId, String msgTopic, 
-			String msgContents, String filePath) throws JsonGenerationException, JsonMappingException, IOException{
+	public void createJsonMessage(String nodeId, String msgId, String msgTopic,String msgContents,
+			String filePath) throws JsonGenerationException, JsonMappingException, IOException{
 		//Convert Message to JSON
 		ObjectMapper mapper = new ObjectMapper();
 		//Create new Message
