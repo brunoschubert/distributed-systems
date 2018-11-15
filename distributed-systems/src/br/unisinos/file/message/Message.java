@@ -7,6 +7,7 @@ public class Message {
 	private String nodeId;
 	private String msgId;
 	private String timeUTC;
+	private String msgTopic;
 	private String msgContents;
 	
 	public Message() {}
@@ -44,6 +45,12 @@ public class Message {
 		this.timeUTC = timeUTC;
 	}
 	
+	public String getMsgTopic() {
+		return msgTopic;
+	}
+	public void setMsgTopic(String msgTopic) {
+		this.msgTopic = msgTopic;
+	}
 	public String getMsgContents() {
 		return msgContents;
 	}
@@ -57,6 +64,7 @@ public class Message {
                 "nodeId='" + nodeId + '\'' +
                 ", msgId=" + msgId +
                 ", timeUTC=" + timeUTC +
+                ", msgTopic=" + msgTopic +
                 ", msgContents=" + msgContents +
                 '}';
     }
