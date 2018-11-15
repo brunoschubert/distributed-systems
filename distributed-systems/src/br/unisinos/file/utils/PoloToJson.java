@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PoloToJson {
 
-	//Convert a Message Object to a matching JSON
+	//Creates and convert a Message Object to a matching JSON
 	public void createJsonMessage(String nodeId, String msgId, String msgTopic, 
 			String msgContents, String filePath) throws JsonGenerationException, JsonMappingException, IOException{
 		//Convert Message to JSON
@@ -23,19 +23,18 @@ public class PoloToJson {
 		msg.setTimeUTC();
 		msg.setMsgTopic(msgTopic);
 		msg.setMsgContents(msgContents);
+		//Save file to specified location
+		mapper.writeValue(new File(filePath), msg);
 
 		/*
-		//JSON POSSIBLE USES
+		//JSON OTHER POSSIBLE USES
         //Transform Message into a String
         String jsonString = mapper.writeValueAsString(msg);
         //Writes JSON to the console
         mapper.writeValue(System.out, msg);
 		 */
-
-		//Writes JSON as file in the specified File Path
-		mapper.writeValue(new File(filePath), msg);
 	}
-	
+//-----------------------------TEST CASE-------------------------------------------------	
 	/* CREATES A HARDCODED JSON
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 		//Convert Message to JSON
