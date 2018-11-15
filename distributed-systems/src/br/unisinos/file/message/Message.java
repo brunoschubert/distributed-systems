@@ -60,7 +60,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-        return "Message{" +
+        return "{" +
                 "nodeId='" + nodeId + '\'' +
                 ", msgId=" + msgId +
                 ", timeUTC=" + timeUTC +
