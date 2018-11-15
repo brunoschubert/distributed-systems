@@ -12,10 +12,11 @@ public class DadNode {
 
         //  Socket to send messages to
         ZMQ.Socket sender = context.socket(ZMQ.PUSH);
-        sender.connect("tcp://localhost:5558");
+        sender.connect("tcp://*:5558");
 
         //  Process tasks forever
         while (!Thread.currentThread ().isInterrupted ()) {
+        	
             String str = "Tis' But a scratch";
             System.out.println(str);
         	Thread.sleep(5000);

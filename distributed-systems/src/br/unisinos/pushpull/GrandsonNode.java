@@ -14,14 +14,15 @@ public class GrandsonNode {
 
 		//  Socket to receive messages on
 		ZMQ.Socket receiver = context.socket(ZMQ.PULL);
-		receiver.connect("tcp://localhost:5559");
+		receiver.connect("tcp://*:5559");
 		
 		//  Socket to receive messages on
 		ZMQ.Socket receiver2 = context.socket(ZMQ.PULL);
-		receiver2.connect("tcp://localhost:5560");
+		receiver2.connect("tcp://*:5560");
 
 		//  Process tasks forever
 		while (!Thread.currentThread ().isInterrupted ()) {
+			
 			byte[] recvd = receiver.recv(0);
 			String string = new String(recvd);
 			

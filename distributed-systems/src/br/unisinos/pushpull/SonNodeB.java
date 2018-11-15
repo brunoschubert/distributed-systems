@@ -14,14 +14,15 @@ public class SonNodeB {
 
 		//  Socket to receive messages on
 		ZMQ.Socket receiver = context.socket(ZMQ.PULL);
-		receiver.connect("tcp://localhost:5558");
+		receiver.connect("tcp://*:5558");
 
 		//  Socket to send messages to
 		ZMQ.Socket sender = context.socket(ZMQ.PUSH);
-		sender.connect("tcp://localhost:5560");
+		sender.connect("tcp://*:5560");
 
 		//  Process tasks forever
 		while (!Thread.currentThread ().isInterrupted ()) {
+			
 			byte[] recvd = receiver.recv(0);
 			String string = new String(recvd);
 			
