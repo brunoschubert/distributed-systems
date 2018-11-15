@@ -22,8 +22,8 @@ public class SonNodeA {
 
 		//  Process tasks forever
 		while (!Thread.currentThread ().isInterrupted ()) {
-			System.out.println("AY");
-			String string = new String(receiver.recv(0));
+			byte[] recvd = receiver.recv(0);
+			String string = new String(recvd);
 	
 			String s1a = string.substring(0, (string.length()/2));
 			
