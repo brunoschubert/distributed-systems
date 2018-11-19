@@ -90,7 +90,7 @@ public abstract class AbstractNode {
 		System.out.println("Insert Save Location[ Example: D:/ ]:");
 		String saveLocation = input.nextLine();
 		String filePath = saveLocation + mId +".json";
-		//Creates a msg based on input and saves it on the default location
+		//Creates a msg based on input and saves it on the location
 		ptj.createJsonMessage(nId, mId, msgTopic, msgContents, filePath);
 		
 		//increments message ID
@@ -119,7 +119,33 @@ public abstract class AbstractNode {
 		System.out.println("NEW MESSAGE FROM: "+ msg.getNodeId() + "\tTOPIC: " + topic);
 		System.out.println("MESSAGE: " + msg.getMsgContents());
 	}
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//----------------------------Publisher-Subscriber Hybrid Methods-----------------------------------	
+	public String receiveMessage(String saveLocation) throws JsonParseException, JsonMappingException, IOException{
+		//Reads message topic
+		String topic = subscriber.recvStr();
+		//TODO ADD DUPLICATE CONTROL -- ADD ID on Topic?
+		//Receive entire JSON as a string
+		String jsonString = subscriber.recvStr();
+		//Creates file handler
+		StringToPolo stp = new StringToPolo();
+		Message msg = new Message();
+		//Creates a new Message File based on the String | Is able to access methods for verifications
+		msg = stp.convertToJson(jsonString);
+		//Prints on console the message contents
+		System.out.println("NEW MESSAGE FROM: "+ msg.getNodeId() + "\tTOPIC: " + topic);
+		System.out.println("MESSAGE: " + msg.getMsgContents());
+		//Creates de filePath
+		String filePath = saveLocation + msg.getMsgId() + this.nodeId + ".json";
+		//Creates a message
+		PoloToJson ptj = new PoloToJson();
+		ptj.createJsonMessage(msg.getNodeId(), msg.getMsgId(), msg.getMsgTopic(), msg.getMsgContents(), filePath);
+		return filePath;
+	}
 }
+
 
 
 
