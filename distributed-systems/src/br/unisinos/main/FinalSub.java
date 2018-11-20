@@ -19,22 +19,7 @@ public class FinalSub {
 		
 		while (!Thread.currentThread ().isInterrupted ()) {
 			
-			sub.startSub(10, 1, "tcp://*:5566", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5567", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5568", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5569", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5570", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5571", topic);
+			sub.startSub(10, 1, "tcp://127.0.0.1:5571", topic);
 			sub.receiveMessage();
 
 		}

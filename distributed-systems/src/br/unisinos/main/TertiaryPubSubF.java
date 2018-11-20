@@ -19,7 +19,7 @@ public class TertiaryPubSubF {
 		System.out.println("Digite o Tópico para se Inscrever: ");
 		String topic = input.nextLine();
 						 //id			//pubTo			//listenFrom
-		pubSub.startPubSub(8, 2, "tcp://*:5571", 1, "tcp://*:5565", topic);
+		pubSub.startPubSub(8, 2, "tcp://127.0.0.1:5571", 1, "tcp://127.0.0.1:5565", topic);
 		
 		//receive a msg and saves it locally
 		while (!Thread.currentThread ().isInterrupted ()) {
