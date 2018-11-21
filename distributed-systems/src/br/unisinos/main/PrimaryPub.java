@@ -1,6 +1,7 @@
 package br.unisinos.main;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -11,7 +12,7 @@ public class PrimaryPub {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException, InterruptedException {
 		PubNode pub = new PubNode();
-		pub.startPublisher(1, 1, "tcp://*:5563");
+		pub.startPublisher(UUID.randomUUID(), 1, "tcp://127.0.0.1:5563");
 
 		pub.publishMsg();
 		

@@ -2,6 +2,7 @@ package br.unisinos.main;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -19,24 +20,9 @@ public class FinalSub {
 		
 		while (!Thread.currentThread ().isInterrupted ()) {
 			
-			sub.startSub(10, 1, "tcp://*:5566", topic);
+			sub.startSub(UUID.randomUUID(), 1, "tcp://127.0.0.1:5566", topic);
 			sub.receiveMessage();
 			
-			sub.startSub(10, 1, "tcp://*:5567", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5568", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5569", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5570", topic);
-			sub.receiveMessage();
-			
-			sub.startSub(10, 1, "tcp://*:5571", topic);
-			sub.receiveMessage();
-
 		}
 		sub.stopSub();
 

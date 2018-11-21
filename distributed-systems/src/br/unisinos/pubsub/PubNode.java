@@ -1,11 +1,13 @@
 package br.unisinos.pubsub;
 
+import java.util.UUID;
+
 import org.zeromq.ZMQ;
 
 public class PubNode extends AbstractNode {
 
 	//-------------------------------PUBLISH ONLY NODE------------------------------------------
-	public void startPublisher(int nodeId, int context, String adress) {
+	public void startPublisher(UUID nodeId, int context, String adress) {
 		//TODO Better Id methods
 		this.nodeId = nodeId;
 		//Starts pub module

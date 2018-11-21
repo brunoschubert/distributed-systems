@@ -5,6 +5,7 @@ import br.unisinos.file.message.*;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.UUID;
 
 import org.zeromq.ZMQ.Context;
 import org.zeromq.ZMQ.Socket;
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class AbstractNode {
-	int nodeId;
+	UUID nodeId;
 	int msgId = 0;
 	
 	String pubFilePath;
@@ -84,7 +85,7 @@ public abstract class AbstractNode {
 		//Use utility class to create the Message as a JSON String and saves file locally 
 		PoloToJson ptj = new PoloToJson();
 		//Converts IDs into Strings
-		String nId = Integer.toString(nodeId);
+		String nId = nodeId.toString();
 		String mId = Integer.toString(msgId);
 		//Receives desired file path
 		System.out.println("Insert Save Location[ Example: D:/ ]:");

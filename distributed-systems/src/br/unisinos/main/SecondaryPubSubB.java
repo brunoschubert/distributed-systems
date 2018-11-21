@@ -2,6 +2,7 @@ package br.unisinos.main;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -19,7 +20,7 @@ public class SecondaryPubSubB {
 		System.out.println("Digite o Tópico para se Inscrever: ");
 		String topic = input.nextLine();
 						 //id			//pubTo			//listenFrom
-		pubSub.startPubSub(2, 2, "tcp://*:5565", 1, "tcp://*:5563", topic);
+		pubSub.startPubSub(UUID.randomUUID(), 2, "tcp://127.0.0.1:5565", 1, "tcp://127.0.0.1:5563", topic);
 		
 		//receive a msg and saves it locally
 		while (!Thread.currentThread ().isInterrupted ()) {
